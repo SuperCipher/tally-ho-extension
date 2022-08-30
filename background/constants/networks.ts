@@ -9,6 +9,15 @@ export const ETHEREUM: EVMNetwork = {
   coingeckoPlatformID: "ethereum",
 }
 
+export const EVMOS: EVMNetwork = {
+  name: "EVMOS",
+  baseAsset: ETH,
+  chainID: "9001",
+  family: "EVM",
+  coingeckoPlatformID: "evmos",
+}
+
+
 export const POLYGON: EVMNetwork = {
   name: "Polygon",
   baseAsset: MATIC,
@@ -97,4 +106,5 @@ export const NETWORK_BY_CHAIN_ID = {
   [GOERLI.chainID]: GOERLI,
   [KOVAN.chainID]: KOVAN,
   [FORK.chainID]: FORK,
+  [EVMOS.chainID]: EVMOS,
 }

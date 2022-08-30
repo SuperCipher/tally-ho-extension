@@ -9,7 +9,7 @@ import { createBackgroundAsyncThunk } from "./utils"
 const defaultSettings = {
   hideDust: false,
   defaultWallet: false,
-  showTestNetworks: false,
+  showTestNetworks: true,
 }
 
 export interface Location {

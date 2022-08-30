@@ -7,6 +7,9 @@ import {
   POLYGON,
 } from "@tallyho/tally-background/constants"
 import {
+  EVMOS,
+} from "../../../background/constants/networks"
+import {
   SUPPORT_ARBITRUM,
   SUPPORT_GOERLI,
   SUPPORT_OPTIMISM,
@@ -55,6 +58,10 @@ const productionNetworks = [
           isDisabled: true,
         },
       ]),
+      {
+        network: EVMOS,
+        info: i18n.t("protocol.l2"),
+      },
   // {
   //   name: "Binance Smart Chain",
   //   info: i18n.t("protocol.compatibleChain"),
