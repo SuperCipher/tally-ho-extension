@@ -60,7 +60,7 @@ const productionNetworks = [
       ]),
       {
         network: EVMOS,
-        info: i18n.t("protocol.l2"),
+        info: i18n.t("protocol.mainnet"),
       },
   // {
   //   name: "Binance Smart Chain",

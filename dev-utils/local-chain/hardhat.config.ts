@@ -25,10 +25,10 @@ module.exports = {
   networks: {
     hardhat: {
       loggingEnabled: true,
-      chainId: 1337,
+      chainId: 9001,
       forking: {
         enabled: true,
-        url: "https://eth-mainnet.alchemyapi.io/v2/AwMJLURd9d9VYP_Q2tG7gr52tSP_wBiA",
+        url: "https://eth.bd.evmos.org:8545",
       },
       allowUnlimitedContractSize: true,
       timeout: 5000,
