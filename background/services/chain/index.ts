@@ -2,6 +2,8 @@ import {
   AlchemyProvider,
   AlchemyWebSocketProvider,
   TransactionReceipt,
+  JsonRpcProvider,
+  WebSocketProvider,
 } from "@ethersproject/providers"
 import { getNetwork } from "@ethersproject/networks"
 import { ethers, utils } from "ethers"
@@ -31,6 +33,7 @@ import {
   OPTIMISM,
   EVM_ROLLUP_CHAIN_IDS,
   GOERLI,
+  EVMOS,
 } from "../../constants"
 import {
   SUPPORT_ARBITRUM,
@@ -230,6 +233,7 @@ export default class ChainService extends BaseService<Events> {
     this.supportedNetworks = [
       ETHEREUM,
       POLYGON,
+      EVMOS,
       ...(SUPPORT_GOERLI ? [GOERLI] : []),
       ...(SUPPORT_ARBITRUM ? [ARBITRUM_ONE] : []),
       ...(SUPPORT_OPTIMISM ? [OPTIMISM] : []),
@@ -241,16 +245,18 @@ export default class ChainService extends BaseService<Events> {
           network.chainID,
           new SerialFallbackProvider(
             network,
-            () =>
+            () => network.chainID == "9001" ?
+              new WebSocketProvider("ws://127.0.0.1:8545/"):
               new AlchemyWebSocketProvider(
                 getNetwork(Number(network.chainID)),
                 ALCHEMY_KEY
               ),
-            () =>
+            () => network.chainID == "9001" ?
+              new JsonRpcProvider("http://127.0.0.1:8545/") :
               new AlchemyProvider(
                 getNetwork(Number(network.chainID)),
                 ALCHEMY_KEY
-              )
+              ),
           ),
         ])
       ),
@@ -1020,7 +1026,8 @@ export default class ChainService extends BaseService<Events> {
       addressOnNetwork.network.chainID !== POLYGON.chainID &&
       addressOnNetwork.network.chainID !== OPTIMISM.chainID &&
       addressOnNetwork.network.chainID !== ARBITRUM_ONE.chainID &&
-      addressOnNetwork.network.chainID !== GOERLI.chainID
+      addressOnNetwork.network.chainID !== GOERLI.chainID &&
+      addressOnNetwork.network.chainID !== EVMOS.chainID
     ) {
       logger.error(
         `Asset transfer check not supported on network ${JSON.stringify(
